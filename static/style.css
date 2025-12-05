@@ -7,9 +7,34 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    transition: background 0.4s ease;
 }
 
-/* Calculator Box with Glass Effect */
+/* Dark mode background */
+body.dark {
+    background: linear-gradient(135deg, #1e1e1e, #000000);
+}
+
+/* Toggle button */
+#themeToggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 12px 15px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+#themeToggle:hover {
+    transform: scale(1.1);
+}
+
+/* Calculator Glass Box */
 .calculator {
     width: 340px;
     padding: 20px;
@@ -17,6 +42,12 @@ body {
     backdrop-filter: blur(12px);
     border-radius: 16px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transition: 0.4s ease;
+}
+
+/* Dark mode calculator */
+body.dark .calculator {
+    background: rgba(255, 255, 255, 0.05);
 }
 
 /* Display */
@@ -27,6 +58,7 @@ body {
     margin-bottom: 20px;
 }
 
+/* Animated display text */
 .display input {
     width: 100%;
     font-size: 32px;
@@ -35,6 +67,12 @@ body {
     border: none;
     text-align: right;
     outline: none;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Buttons Grid */
@@ -44,4 +82,43 @@ body {
     gap: 12px;
 }
 
-/* Buttons St*
+/* Buttons with Glow */
+button {
+    padding: 18px;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.25);
+    transition: 0.25s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+button:hover {
+    background: rgba(255, 255, 255, 0.45);
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px #00f2ff;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+/* Operator buttons (orange) */
+button:nth-child(4n),
+button:last-child {
+    background: #ff9f43;
+    color: white;
+}
+
+button:nth-child(4n):hover,
+button:last-child:hover {
+    background: #ff7f00;
+    box-shadow: 0 0 15px #ff8a00;
+}
+
+/* Wide Zero Button */
+.span-two {
+    grid-column: span 2;
+}
