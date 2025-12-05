@@ -2,13 +2,11 @@
 const result = document.getElementById("result");
 
 // Preload click sound
-const clickAudio = new Audio("https://www.soundjay.com/buttons/sounds/button-16.mp3");
-clickAudio.volume = 0.3;
+const clickAudio = document.getElementById("clickSound");
 
 // Play click sound safely
 function btnSound() {
-    // Reset to start so it can play multiple times quickly
-    clickAudio.currentTime = 0;
+    clickAudio.currentTime = 0; // reset to start
     clickAudio.play();
 }
 
