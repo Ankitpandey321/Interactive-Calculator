@@ -75,3 +75,19 @@ document.addEventListener("keydown", function (event) {
         btnSound();
     }
 });
+
+// Dark mode toggle
+const themeToggle = document.getElementById("themeToggle");
+
+themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+
+    // Change icon between moon and sun
+    if (document.body.classList.contains("dark")) {
+        themeToggle.textContent = "☀️";
+    } else {
+        themeToggle.textContent = "🌙";
+    }
+
+    btnSound(); // play sound on toggle
+});
