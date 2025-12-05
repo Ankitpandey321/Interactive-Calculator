@@ -1,74 +1,47 @@
-/* General Styling */
+/* Background */
 body {
-    font-family: Arial, sans-serif;
-    background-color:beige;
+    font-family: "Poppins", Arial, sans-serif;
+    background: linear-gradient(135deg, #89f7fe, #66a6ff);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-  }
-  
-  .calculator {
-    width: 320px;
-    background-color: #fff;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  .display {
-    background-color: #333;
+}
+
+/* Calculator Box with Glass Effect */
+.calculator {
+    width: 340px;
     padding: 20px;
-  }
-  
-  .display input {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* Display */
+.display {
+    background: rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.display input {
     width: 100%;
-    font-size: 24px;
-    color: #fff;
+    font-size: 32px;
+    color: #00ffae;
     background: none;
     border: none;
     text-align: right;
     outline: none;
-  }
-  
-  .buttons {
+}
+
+/* Buttons Grid */
+.buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-  }
-  
-  button {
-    font-size: 18px;
-    border: none;
-    outline: none;
-    background-color: #f3f3f3;
-    padding: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #e0e0e0;
-  }
-  
-  button:active {
-    background-color: #ccc;
-  }
-  
-  button.span-two {
-    grid-column: span 2;
-  }
-  
-  button:nth-child(4n) {
-    background-color: #f9a825;
-    color: #fff;
-  }
-  
-  button:nth-child(4n):hover {
-    background-color: #f57f17;
-  }
-  
-  button:nth-child(4n):active {
-    background-color: #ef6c00;
-  }
-  
+    gap: 12px;
+}
+
+/* Buttons St*
