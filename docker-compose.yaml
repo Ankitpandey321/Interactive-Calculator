@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: calculator-static:latest
+    container_name: calculator-web
+    ports:
+      - "8080:80"           # access site at http://localhost:8080
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: calculator-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_here
+      MYSQL_DATABASE: calculator_db
+      MYSQL_USER: calc_user
+      MYSQL_PASSWORD: calc_pass_here
+    volumes:
+      - mysql-data:/var/lib/mysql
+      # init.sql will be executed on first container start
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "3306:3306"         # optional: expose for host access
+    restart: unless-stopped
+
+volumes:
+  mysql-data:
