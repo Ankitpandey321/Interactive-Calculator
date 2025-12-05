@@ -1,12 +1,17 @@
+# Use Python slim image
 FROM python:3.10-slim
 
+# Set working directory
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Flask
+RUN pip install --no-cache-dir flask
 
+# Copy all files
 COPY . .
 
-EXPOSE 8080
+# Expose port
+EXPOSE 5000
 
+# Run the app
 CMD ["python3", "app.py"]
