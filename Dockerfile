@@ -1,11 +1,12 @@
-# Use official nginx to serve static files
-FROM nginx:stable-alpine
+FROM python:3.10-slim
 
-# Remove default html and copy project files into nginx html folder
-RUN rm -rf /usr/share/nginx/html/*
-COPY . /usr/share/nginx/html
+WORKDIR /app
 
-# Expose port 80
-EXPOSE 80
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Use default nginx entrypoint/cmd
+COPY . .
+
+EXPOSE 8080
+
+CMD ["python3", "app.py"]
