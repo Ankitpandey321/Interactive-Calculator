@@ -3,20 +3,17 @@ const result = document.getElementById("result");
 
 // Append clicked button value
 function appendValue(value) {
-    playClick();
     if (result.value === "Error") result.value = "";
     result.value += value;
 }
 
 // Clear display
 function clearResult() {
-    playClick();
     result.value = "";
 }
 
 // Delete last character
 function deleteLast() {
-    playClick();
     if (result.value === "Error") {
         result.value = "";
     } else {
@@ -26,7 +23,6 @@ function deleteLast() {
 
 // Calculate the expression
 function calculateResult() {
-    playClick();
     try {
         let expression = result.value;
 
@@ -55,7 +51,7 @@ function animateFlash() {
 }
 
 // Smooth click sound
-function playClick() {
+function btnSound() {
     const audio = new Audio("https://www.soundjay.com/buttons/sounds/button-16.mp3");
     audio.volume = 0.3;
     audio.play();
@@ -67,11 +63,15 @@ document.addEventListener("keydown", function (event) {
 
     if (!isNaN(key) || "+-*/.%".includes(key)) {
         appendValue(key);
+        btnSound();
     } else if (key === "Enter") {
         calculateResult();
+        btnSound();
     } else if (key === "Backspace") {
         deleteLast();
+        btnSound();
     } else if (key === "Escape") {
         clearResult();
+        btnSound();
     }
 });
