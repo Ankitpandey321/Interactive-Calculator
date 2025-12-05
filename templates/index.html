@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interactive Calculator</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
@@ -46,7 +46,7 @@
   <!-- Click Sound -->
   <audio id="clickSound" src="https://raw.githubusercontent.com/ananyajain1122/calculator-sounds/main/click.mp3"></audio>
 
-  <script src="script.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>
