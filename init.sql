@@ -1,10 +1,11 @@
-CREATE DATABASE IF NOT EXISTS calculator_db;
+CREATE DATABASE IF NOT EXISTS counterdb;
 
-USE calculator_db;
+USE counterdb;
 
-CREATE TABLE IF NOT EXISTS calc_logs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    expression VARCHAR(255),
-    result VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS counter (
+    id INT PRIMARY KEY,
+    value INT
 );
+
+INSERT INTO counter (id, value) VALUES (1, 0)
+ON DUPLICATE KEY UPDATE value = value;
