@@ -1,16 +1,31 @@
-from flask import Flask, send_from_directory
+from flask import Flask, render_template, jsonify
+import mysql.connector
 
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__)
 
-# Serve index.html
-@app.route("/")
+# Connect to MySQL
+def get_connection():
+    return mysql.connector.connect(
+        host="mysql",
+        user="root",
+        password="password",
+        database="counterdb"
+    )
+
+@app.route('/')
 def home():
-    return send_from_directory('.', 'index.html')
+    return app.send_static_file('index.html')
 
-# Serve static files (CSS, JS, audio)
-@app.route("/<path:filename>")
-def static_files(filename):
-    return send_from_directory('.', filename)
+# Optional API to get counter value
+@app.route('/api/counter')
+def get_counter():
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT value FROM counter WHERE id=1")
+    value = cursor.fetchone()[0]
+    cursor.close()
+    conn.close()
+    return jsonify({'counter': value})
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
