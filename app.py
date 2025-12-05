@@ -14,7 +14,7 @@ def get_connection():
 
 @app.route('/')
 def home():
-    return app.send_static_file('index.html')
+    return render_template('index.html')  # Serve HTML from templates folder
 
 # Optional API to get counter value
 @app.route('/api/counter')
