@@ -1,9 +1,11 @@
+version: "3.8"
+
 services:
   app:
     build: .
     container_name: calculator-app
     ports:
-      - "8080:8080"
+      - "8080:5000"
     depends_on:
       - mysql
 
@@ -12,7 +14,6 @@ services:
     container_name: mysql-db
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: calculator_db
     ports:
       - "3306:3306"
     volumes:
