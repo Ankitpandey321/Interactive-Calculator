@@ -1,6 +1,17 @@
 // Select display
 const result = document.getElementById("result");
 
+// Preload click sound
+const clickAudio = new Audio("https://www.soundjay.com/buttons/sounds/button-16.mp3");
+clickAudio.volume = 0.3;
+
+// Play click sound safely
+function btnSound() {
+    // Reset to start so it can play multiple times quickly
+    clickAudio.currentTime = 0;
+    clickAudio.play();
+}
+
 // Append clicked button value
 function appendValue(value) {
     if (result.value === "Error") result.value = "";
@@ -42,7 +53,7 @@ function calculateResult() {
     animateFlash();
 }
 
-// Add a flash animation on result update
+// Flash effect on calculation
 function animateFlash() {
     result.style.background = "#555";
     setTimeout(() => {
@@ -50,14 +61,7 @@ function animateFlash() {
     }, 100);
 }
 
-// Smooth click sound
-function btnSound() {
-    const audio = new Audio("https://www.soundjay.com/buttons/sounds/button-16.mp3");
-    audio.volume = 0.3;
-    audio.play();
-}
-
-// Enable keyboard support
+// Keyboard support
 document.addEventListener("keydown", function (event) {
     const key = event.key;
 
