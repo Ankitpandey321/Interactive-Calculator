@@ -4,9 +4,9 @@ const result = document.getElementById("result");
 // Preload click sound
 const clickAudio = document.getElementById("clickSound");
 
-// Play click sound safely
+// Play click sound
 function btnSound() {
-    clickAudio.currentTime = 0; // reset to start
+    clickAudio.currentTime = 0;
     clickAudio.play();
 }
 
@@ -84,7 +84,6 @@ const themeToggle = document.getElementById("themeToggle");
 themeToggle.addEventListener("click", () => {
     document.body.classList.toggle("dark");
 
-    // Change icon between moon and sun
     if (document.body.classList.contains("dark")) {
         themeToggle.textContent = "☀️";
     } else {
