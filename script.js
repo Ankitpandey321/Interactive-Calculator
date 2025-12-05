@@ -1,57 +1,77 @@
-// Append value to the display
+// Select display
+const result = document.getElementById("result");
+
+// Append clicked button value
 function appendValue(value) {
-    const result = document.getElementById("result");
+    playClick();
+    if (result.value === "Error") result.value = "";
     result.value += value;
-  }
-  
-  // Clear the display
-  function clearResult() {
-    document.getElementById("result").value = "";
-  }
-  
-  // Delete the last character
-  function deleteLast() {
-    const result = document.getElementById("result");
-    result.value = result.value.slice(0, -1);
-  }
-  
-  // Calculate and display the result
-  function calculateResult() {
-    const result = document.getElementById("result");
+}
+
+// Clear display
+function clearResult() {
+    playClick();
+    result.value = "";
+}
+
+// Delete last character
+function deleteLast() {
+    playClick();
+    if (result.value === "Error") {
+        result.value = "";
+    } else {
+        result.value = result.value.slice(0, -1);
+    }
+}
+
+// Calculate the expression
+function calculateResult() {
+    playClick();
     try {
-      result.value = eval(result.value);
+        let expression = result.value;
+
+        if (expression.trim() === "") return;
+
+        expression = expression.replace(/%/g, "/100");
+
+        let calculated = eval(expression);
+
+        if (!isFinite(calculated)) throw new Error("Invalid");
+
+        result.value = calculated;
     } catch (error) {
-      result.value = "Error";
+        result.value = "Error";
     }
-  }
-  
-  // Link keyboard keys to calculator buttons
-  document.addEventListener("keydown", function (event) {
-    const result = document.getElementById("result");
-  
-    // Number and operator keys
-    if (event.key >= '0' && event.key <= '9' || ['+', '-', '*', '/', '%'].includes(event.key)) {
-      result.value += event.key;
+
+    animateFlash();
+}
+
+// Add a flash animation on result update
+function animateFlash() {
+    result.style.background = "#555";
+    setTimeout(() => {
+        result.style.background = "transparent";
+    }, 100);
+}
+
+// Smooth click sound
+function playClick() {
+    const audio = new Audio("https://www.soundjay.com/buttons/sounds/button-16.mp3");
+    audio.volume = 0.3;
+    audio.play();
+}
+
+// Enable keyboard support
+document.addEventListener("keydown", function (event) {
+    const key = event.key;
+
+    if (!isNaN(key) || "+-*/.%".includes(key)) {
+        appendValue(key);
+    } else if (key === "Enter") {
+        calculateResult();
+    } else if (key === "Backspace") {
+        deleteLast();
+    } else if (key === "Escape") {
+        clearResult();
     }
-  
-    // Decimal point
-    if (event.key === '.') {
-      result.value += event.key;
-    }
-  
-    // Backspace key to delete the last character
-    if (event.key === 'Backspace') {
-      deleteLast();
-    }
-  
-    // Enter key to calculate the result
-    if (event.key === 'Enter') {
-      calculateResult();
-    }
-  
-    // Clear the result with 'C' key
-    if (event.key.toUpperCase() === 'C') {
-      clearResult();
-    }
-  });
-  
+});
